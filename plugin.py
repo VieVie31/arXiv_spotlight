@@ -1,3 +1,7 @@
+import urllib
+import webbrowser
+import xml.etree.ElementTree as ET
+
 def get_paper(request):
     f = open("template.html")
     lines = f.readlines()
@@ -16,6 +20,10 @@ def results(fields, original_query):
         "html": html_paper
     }
 
-def run(*arg, **args):
-    pass
+def run(request):
+    url = 'http://export.arxiv.org/api/query?search_query=all:{}&start=0&max_results=1'.format(request)
+    data = urllib.urlopen(url).read()
+    root = ET.fromstring(data)
+    paper_url = root[7][0].text.replace('/abs/', '/pdf/') + '.pdf'
+    webbrowser.open(paper_url)
 
