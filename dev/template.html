@@ -8,6 +8,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
+            font-size: 50%;
             overflow: hidden;
             font-family: 'Lucida Grande', helvetica, arial, verdana, sans-serif;
         }
@@ -20,12 +21,19 @@
             color: #fff;
         }
         
-        #loader {
+        #loader, #loaded {
             text-align: center;
         }
 
-        #iframe_res {
+        #loaded {
             display: none;
+        }
+
+        #abstract {
+            text-align: justify;
+            text-justify: inter-word;
+            margin-right: 10%;
+            margin-left: 10%;
         }
      </style>
 </head>
@@ -39,8 +47,13 @@
         <p>Loading, please wait...</p>
     </div>
 
-    <iframe id="iframe_res" width="100%" height="100%" src="">
-    </iframe>
+    <div id="loaded">
+        <h1 id="title"></h1>
+        <h4 id="date"></h4>
+        <h2 id="authors"></h2>
+        <h3><a id="link"></a></h3>
+        <p id="abstract"></p>
+    </div>
 
     <script type="text/javascript">
         var request = "siamese net";
@@ -86,11 +99,16 @@
 
 
         $.when(arxiv_search(request)).then(function(data){
-            var url = data[0].link.replace("abs", "pdf");
+            var paper = data[0];
 
-            $("#iframe_res").attr('src', url);
-            $("#iframe_res").css('display', 'block');
+            $("#title").text(paper.title);
+            $("#authors").text(paper.authors.join(", ").replace(' ,', ','));
+            $("#date").text(paper.date);
+            $("#link").text(paper.link);
+            $("#link").attr('href', paper.link.replace('abs', 'pdf'));
+            $("#abstract").text(paper.summary);
 
+            $("#loaded").css('display', 'block');
             $("#loader").css('display', 'none');
         });
     </script>
