@@ -1,5 +1,7 @@
 # Spotlight arXiv bundle
 
+:arrow_right: See how to install and use it on [youtube](https://youtu.be/4gwc3rbZjLU) !
+
 ## Installation
 
 To install this plugin, you need Flashlight working.
