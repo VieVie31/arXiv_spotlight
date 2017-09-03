@@ -1,0 +1,9 @@
+{
+    "name": "arxiv",
+    "displayName": "arXiv",
+    "description": "Search a paper in the arXiv library...",
+    "examples": ["arxiv Yann LeCun", "arXiv siamese net"],
+    "categories": ["Utilities"],
+    "creator_name": "VieVie31",
+    "creator_url": "github.com/VieVie31"
+}
